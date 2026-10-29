@@ -199,14 +199,8 @@ Anschließend konnte Home Assistant OS über ein Linux-Live-System direkt auf di
 ## 7. Quellen & weiterführende Links
 
 - [Home Assistant – Generic x86-64 Installation](https://www.home-assistant.io/installation/generic-x86-64/)
+- [Lenovo – BIOS Update für ThinkCentre M715q Gen 2](https://support.lenovo.com/fr/fr/downloads/ds504437-flash-bios-update-thinkcentre-m715q-2nd-gen)
+- [Reddit-Bericht zum NVMe-Boot-Problem](https://www.reddit.com/r/MiniPCs/comments/1r7ddln/thinkcentre_m715q_gen2_nvme_boot_freeze_solution/)
 - [Rufus](https://rufus.ie/)
 - [Ubuntu Desktop](https://ubuntu.com/download/desktop)
-- [Lenovo – BIOS Update für ThinkCentre M715q Gen 2](https://support.lenovo.com/fr/fr/downloads/ds504437-flash-bios-update-thinkcentre-m715q-2nd-gen)
 - [Ventoy](https://www.ventoy.net/)
-- [Community-Bericht zum NVMe-Boot-Problem](https://www.reddit.com/r/MiniPCs/comments/1r7ddln/thinkcentre_m715q_gen2_nvme_boot_freeze_solution/)
-
----
-
-## 8. Navigation
-
-- [⬅️ Zurück zur Übersicht](../README.md)
