@@ -13,8 +13,6 @@ Folgende Symptome konnten beobachtet werden:
 
 Die Fehlersuche deutete damit auf ein Problem bei der Initialisierung der NVMe-SSD durch das BIOS/UEFI des ThinkCentre hin.
 
----
-
 ## 2. Fehlersuche
 
 ### 2.1 BIOS-Einstellungen prüfen
@@ -57,28 +55,22 @@ Mit einem Linux-Live-USB-Stick ließ sich der Rechner anschließend problemlos s
 **Ergebnis:**  
 Sowohl das ThinkCentre ohne die betreffende NVMe-SSD als auch die NVMe-SSD in einem anderen System funktionierten ordnungsgemäß.
 
----
-
 ## 3. Ursache
 
 Die durchgeführten Tests deuteten auf ein Problem bei der Initialisierung der verwendeten M.2-NVMe-SSD durch die installierte BIOS-/UEFI-Version des ThinkCentre hin.
 
 Bei der weiteren Recherche wurde ein vergleichbares Verhalten beim **ThinkCentre M715q Gen 2** gefunden, bei dem ein Downgrade der BIOS-Version als Lösung beschrieben wurde.
 
-> **Hinweis:**  
+> [!WICHTIG]
 > Die beschriebene Ursache basiert auf dem reproduzierbaren Verhalten des eigenen Systems sowie einem vergleichbaren Community-Bericht. Daraus lässt sich nicht ableiten, dass grundsätzlich alle neueren BIOS-Versionen oder alle NVMe-SSDs beim M715q Gen 2 betroffen sind.
-
----
 
 ## 4. Lösung: BIOS-Downgrade auf M1XKT49A
 
-Im betroffenen System konnte das Problem durch ein Downgrade auf die BIOS-Version **M1XKT49A** behoben werden.
+Im betroffenen System konnte das Problem durch ein Downgrade auf die BIOS-Version `M1XKT49A` behoben werden.
 
-Verwendetes Lenovo-BIOS-Image:
+Verwendetes Lenovo-BIOS-Image: `m1xj949usa.iso`
 
-`m1xj949usa.iso`
-
-> **Achtung:**  
+> [!WICHTIG]
 > Ein BIOS-Update oder -Downgrade verändert die Firmware des Geräts. Ein unterbrochener Flash-Vorgang oder eine ungeeignete Firmware kann dazu führen, dass das System nicht mehr startet. Vor der Durchführung muss sichergestellt werden, dass die Firmware zum verwendeten Gerätemodell passt.
 
 ### Voraussetzungen
@@ -86,7 +78,7 @@ Verwendetes Lenovo-BIOS-Image:
 Benötigt werden:
 
 - USB-Stick
-- Ventoy
+- **Ventoy**
 - passendes Lenovo-BIOS-Image für das ThinkCentre M715q Gen 2
 
 ### BIOS-Bootmedium vorbereiten
@@ -103,28 +95,22 @@ Benötigt werden:
 4. ThinkCentre starten.
 5. Im Ventoy-Menü das Lenovo-BIOS-Image auswählen.
 6. Lenovo Flash Utility starten.
-7. Die Warnung
-
-   `BIOS ROM file is older than (or same as) current BIOS ROM image`
-
-   mit `Y` bestätigen.
+7. Die Warnung `BIOS ROM file is older than (or same as) current BIOS ROM image` mit `Y` bestätigen.
 8. Abfragen zur Änderung von Seriennummer, Machine Type und Model mit `N` beantworten, damit die vorhandenen Gerätedaten unverändert bleiben.
 9. Flash-Vorgang vollständig abschließen lassen.
 10. Gerät anschließend ausschalten.
 
-> **Wichtig:**  
+> [!WICHTIG]
 > Das ThinkCentre während des Flash-Vorgangs nicht ausschalten oder von der Stromversorgung trennen.
 
 ### BIOS anschließend konfigurieren
 
 1. ThinkCentre starten und mit `F1` das BIOS-Setup öffnen.
-2. Prüfen, ob **M1XKT49A** als BIOS-Version angezeigt wird.
+2. Prüfen, ob `M1XKT49A` als BIOS-Version angezeigt wird.
 3. Mit `F9` die **Setup Defaults** laden.
 4. **Secure Boot** deaktivieren.
 5. Änderungen mit `F10` speichern.
 6. ThinkCentre ausschalten.
-
----
 
 ## 5. Home Assistant OS installieren
 
@@ -138,7 +124,7 @@ Benötigt werden:
 
 - USB-Stick
 - aktuelles Ubuntu-Desktop-Image
-- Rufus
+- **Rufus**
 
 1. Das aktuelle Ubuntu-Desktop-Image herunterladen.
 2. **Rufus** unter Windows starten.
@@ -146,7 +132,7 @@ Benötigt werden:
 4. Das Ubuntu-Image als Boot-Abbild auswählen.
 5. Den bootfähigen USB-Stick erstellen.
 
-> **Hinweis:**  
+> [!WICHTIG]
 > Beim Erstellen des Bootmediums werden vorhandene Daten auf dem USB-Stick gelöscht.
 
 ### Linux-Live-System starten
@@ -162,10 +148,10 @@ Benötigt werden:
 
 Nach dem Start des Linux-Live-Systems wird das aktuelle **Home Assistant OS Generic x86-64 Image** entsprechend der offiziellen Home-Assistant-Anleitung direkt auf die interne NVMe-SSD geschrieben.
 
-> **Achtung:**  
+> [!WICHTIG]
 > Beim Schreiben des HAOS-Images werden sämtliche vorhandenen Daten und Partitionen auf dem ausgewählten Ziellaufwerk gelöscht. Vor dem Start unbedingt sicherstellen, dass die interne NVMe-SSD als korrektes Ziellaufwerk ausgewählt wurde.
 
-Der jeweils aktuelle Installationsablauf ist in der offiziellen [Home Assistant – Generic x86-64 Installation](https://www.home-assistant.io/installation/generic-x86-64/) Dokumentation beschrieben.
+Der jeweils aktuelle Installationsablauf ist in der offiziellen Home-Assistant-Dokumentation beschrieben.
 
 ### Erster Start
 
@@ -178,11 +164,9 @@ Nach dem erfolgreichen Schreiben des HAOS-Images:
 5. Warten, bis Home Assistant OS vollständig gestartet wurde.
 6. Die Ersteinrichtung von Home Assistant über einen anderen Rechner im Netzwerk durchführen.
 
----
-
 ## 6. Ergebnis
 
-Nach dem Downgrade auf **M1XKT49A** konnte das ThinkCentre mit eingebauter M.2-NVMe-SSD wieder ordnungsgemäß gestartet werden.
+Nach dem Downgrade auf `M1XKT49A` konnte das ThinkCentre mit eingebauter M.2-NVMe-SSD wieder ordnungsgemäß gestartet werden.
 
 Anschließend konnte Home Assistant OS über ein Linux-Live-System direkt auf die interne NVMe-SSD geschrieben und davon gestartet werden.
 
@@ -194,9 +178,7 @@ Anschließend konnte Home Assistant OS über ein Linux-Live-System direkt auf di
 
 `NVMe eingebaut → Linux-Live-System startet → HAOS auf NVMe schreiben → HAOS startet von NVMe`
 
----
-
-## 7. Quellen & weiterführende Links
+## Nützliche Links & Quellen
 
 - [Home Assistant – Generic x86-64 Installation](https://www.home-assistant.io/installation/generic-x86-64/)
 - [Lenovo – BIOS Update für ThinkCentre M715q Gen 2](https://support.lenovo.com/fr/fr/downloads/ds504437-flash-bios-update-thinkcentre-m715q-2nd-gen)
